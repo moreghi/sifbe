@@ -1,0 +1,33 @@
+{
+    
+    "host": "eu-cdbr-west-02.cleardb.net",
+    "user": "b60576bf178464",
+    "password": "dddd8db2",
+    "database":"heroku_002b5ddee9750af",
+    "port":3306,
+    "dialect": "mysql",
+    "underscored": 0,
+    "pool": {
+      "max": 5,
+      "min": 0,
+      "acquire": 30000,
+      "idle": 10000
+    },
+     
+    "secret": "mysecret is zoe",
+    "expiresIn": 86400, 
+    "emailFrom": "moreno@tecnomedia.biz",
+    "smtpOptions": {
+        "host": "authsmtp.tecnomedia.biz",
+        "port": 25,
+        "auth": {
+            "user": "moreno@tecnomedia.biz",
+            "pass": "MRN2021GSLL"
+        },
+        "tls": {
+            "rejectUnauthorized": false
+        },
+        "secure": false
+    }
+    
+}
