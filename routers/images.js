@@ -22,6 +22,7 @@ let routes = (app) => {
   router.get("/files/users/:name", controller.downloadusers);
   router.get("/files/products/:name", controller.downloadproducts);
   router.get("/files/personas/:name", controller.downloadpersones);
+  router.get("/files/images/:name", controller.downloadimages);
   
   router.get("/files/direttivo/:name", controller.downloaddirettivo);
 //  router.get("/carousel/sanfra/:name", controller.downloadcarousel);

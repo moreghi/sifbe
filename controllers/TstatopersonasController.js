@@ -11,7 +11,7 @@ exports.getAll = (req,res)=> {
             console.log(err,'errore il lettura all t_stato_personas');
         }
         if(result.length>0) {
-            console.log('lettura tutti gli stati persona ' + result.length);  
+            console.log('lettura tutti gli stati persona  -------------->  ' + JSON.stringify(result));  
 
             console.log(`rilevati ${result.length} stati persona `)
             res.send({
@@ -48,12 +48,14 @@ exports.getbyid = (req,res)=> {
             res.send({
              messagexx:`rilevati ${result.length}  ------- get per id ${id} -------   Stati persona`,
                 message:`situazione attuale per stato id: .....  ${id}`,
+                rc: 'ok',
                 data:result[0]
             });
         }else {
             console.log(`nessun record presente per id: ${id} `); 
             res.send({
                 message: `nessun stato presente for id: ${id}`,
+                rc: 'nf',
                 data:null
             });
         }
@@ -70,7 +72,7 @@ exports.createNew = (req,res)=> {
       // creo le variabili dai campi di input
       let id = req.body.id;
       let d_stato_persona = req.body.d_stato_persona;
-      let key_utenti_operation = req.body.id_utenti_operation;
+      let key_utenti_operation = req.body.key_utenti_operation;
    
       let strsql =  `insert into t_stato_personas
                   (id,d_stato_persona,key_utenti_operation) 
@@ -114,7 +116,7 @@ exports.createNew = (req,res)=> {
 
     let d_stato_persona = req.body.d_stato_persona;
     let tappo = req.body.tappo;
-    let key_utenti_operation = req.body.id_utenti_operation;
+    let key_utenti_operation = req.body.key_utenti_operation;
 
 
     let strsql =  `update t_stato_personas set

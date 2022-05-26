@@ -35,16 +35,14 @@ router.get('/getCommandeByGiornataIdFiltrato/:id/stato/:stato', [authjwt.verifyT
 // ricerca per lastId    
 router.get('/commandalast/lastid', [authjwt.verifyToken] , commandas.getLastCommandaid);
 
-// cancellazione globale
+// cancellazione globale  -- imposta i valori di id = 1
 router.delete('/commandadlt/deleteAll', [authjwt.verifyToken] , commandas.deleteAll);
 
-// cancellazione globale
+// cancellazione globale  --- non funziona
 router.delete('/commandadlt/deleteAllTrunc', [authjwt.verifyToken] , commandas.deleteAllTrunc);
 
 // totali per giornata   
 router.get('/getConteggiByGiornataId/:id', [authjwt.verifyToken] , commandas.getConteggiByGiornataId);
-
-
 
 // ricerca per competenza e stato ordinata
 router.get('/getCommandeByGiornataeCompetenzaestato/:id/comp/:comp/stato/:stato/:order', [authjwt.verifyToken] , commandas.getCommandeforGiornataeCompetenzaestato);

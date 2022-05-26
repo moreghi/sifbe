@@ -266,3 +266,47 @@ exports.delete = (req,res)=> {
 
 }  
 
+exports.getLastId = (req,res)=> {
+    
+    let strSql = 'select * from t_taglias';
+
+    let tappo = 9999;
+    let strsql = '';
+
+    console.log('backend ----------------------------- getLastId ');
+     
+    strsql =  strSql + ' where `t_taglias`.`id` < ' + tappo + ' order by `t_taglias`.`id` desc';  
+    console.log(`strsql:  ${strsql} `);
+ 
+    db.query(strsql,(err,result)=> {
+        if(err) {
+           res.status(500).send({
+                message: `553x errore il lettura all taglia - erro: ${err}`,
+                data:null
+            });
+            return;  
+        }
+        if(result.length>0) {
+            console.log('abc - lettura ultimo id' + result.length);  
+
+            console.log(`rilevati ${result.length} tagli `)
+            res.status(200).send({ 
+                message:'Situazione attuale ultimo id',
+                number:  result.length,
+                rc: 'ok',
+                data:result[0]
+            });                    
+        }else {
+            console.log('nessun record presente ' + result.length); 
+
+            res.status(200).send({ 
+                message: `nessuno taglio presente  `,
+                rc: 'nf',
+                data:null
+            });                    
+        }
+
+    });
+
+
+}

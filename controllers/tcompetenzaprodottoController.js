@@ -73,8 +73,7 @@ exports.createNew = (req,res)=> {
       // creo le variabili dai campi di input
       let id = req.body.id;
       let d_competenza = req.body.d_competenza;
-      let stato = req.body.stato;
-      let id_utenti_operation = req.body.id_utenti_operation;
+      let key_utenti_operation = req.body.key_utenti_operation;
   
   /*
       Attenzione:
@@ -85,10 +84,10 @@ exports.createNew = (req,res)=> {
   */
   
       let strsql =  `insert into t_competenza_prodottos
-                  (id,d_competenza,stato,id_utenti_operation) 
+                  (id,d_competenza,key_utenti_operation) 
                   valueS
                   (
-                    ${id},'${d_competenza}',${stato},${id_utenti_operation} 
+                    ${id},'${d_competenza}',${key_utenti_operation} 
                   )`;
       
     
@@ -125,14 +124,12 @@ exports.createNew = (req,res)=> {
     // definisco le variabili per aggiornamento campi
 
     let d_competenza = req.body.d_competenza;
-    let stato = req.body.stato;
-    let id_utenti_operation = req.body.id_utenti_operation;
+    let key_utenti_operation = req.body.key_utenti_operation;
 
 
     let strsql =  `update t_competenza_prodottos set
                     d_competenza = '${d_competenza}',
-                    stato = ${stato},
-                    id_utenti_operation = ${id_utenti_operation}
+                    key_utenti_operation = ${key_utenti_operation}
                     where id = ${id}`;
 
     // verifico prima l'esistenza del record

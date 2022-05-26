@@ -234,7 +234,10 @@ exports.login = (req, res) => {
     })
       .then(user => {
         if (!user) {
-          return res.status(404).send({ message: "email inesistente" });
+          return res.status(404).send({ 
+            message: "email inesistente", 
+            rc: 'nf' 
+          });
         }
   
         var passwordIsValid = bcrypt.compareSync(

@@ -15,8 +15,9 @@ router.post('/create', tstatos.createNew);
 router.put('/updatebyid/:id', tstatos.updateByid);
 // cancellazione utente
 router.delete('/deletebyid/:id', tstatos.delete);
-
-
+// lettura ultimo id
+router.get('/lastid', tstatos.getLastId);
 
 
 module.exports = router;
+

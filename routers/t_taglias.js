@@ -15,8 +15,11 @@ router.post('/create', ttaglias.createNew);
 router.put('/updatebyid/:id', ttaglias.updateByid);
 // cancellazione tipologia
 router.delete('/deletebyid/:id', ttaglias.delete);
-
+// lettura ultimo id
+router.get('/lastid', ttaglias.getLastId);
 
 
 
 module.exports = router;
+
+

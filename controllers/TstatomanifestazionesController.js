@@ -16,12 +16,14 @@ exports.getAll = (req,res)=> {
             console.log(`rilevati ${result.length} stati manifestazione `)
             res.send({
                 message:'Situazione attuale stati manifestazione',
+                rc: 'ok',
                 data:result
             });
         }else {
             console.log('nessun record presente ' + result.length); 
             res.send({
                 message:'nessun record presente',
+                rc: 'nf',
                 data:null
             });
         }
@@ -46,12 +48,14 @@ exports.getbyid = (req,res)=> {
             res.send({
              messagexx:`rilevati ${result.length}  ------- get per id ${key} -------   Stati manifestazione`,
                 message:`situazione attuale per ruolo id: .....  ${key}`,
+                rc: 'ok',
                 data:result[0]
             });
         }else {
             console.log(`nessun record presente per id: ${key} `); 
             res.send({
                 message: `nessun ruolo presente for id: ${key}`,
+                rc: 'nf',
                 data:null
             });
         }
@@ -98,6 +102,7 @@ exports.createNew = (req,res)=> {
         
                   res.send({
                   message: `Stato Utente inserito regolarmente `,
+                  rc: 'ok',
                   data: result
               });
              
@@ -265,5 +270,48 @@ exports.delete = (req,res)=> {
 
 }  
 
+exports.getLastId = (req,res)=> {
+    
+    let strSql = 'select * from t_stato_manifestaziones';
 
+    let tappo = 9999;
+    let strsql = '';
+
+    console.log('backend ----------------------------- getLastId ');
+     
+    strsql =  strSql + ' where `t_stato_manifestaziones`.`id` < ' + tappo + ' order by `t_stato_manifestaziones`.`id` desc';  
+    console.log(`strsql:  ${strsql} `);
+ 
+    db.query(strsql,(err,result)=> {
+        if(err) {
+           res.status(500).send({
+                message: `553x errore il lettura all manifestaziones - erro: ${err}`,
+                data:null
+            });
+            return;  
+        }
+        if(result.length>0) {
+            console.log('abc - lettura ultimo id' + result.length);  
+
+            console.log(`rilevati ${result.length} tabella Manifestazione  `)
+            res.status(200).send({ 
+                message:'Situazione attuale ultimo id',
+                number:  result.length,
+                rc: 'ok',
+                data:result[0]
+            });                    
+        }else {
+            console.log('nessun record presente ' + result.length); 
+
+            res.status(200).send({ 
+                message: `nessuno stato Cucina presente  `,
+                rc: 'nf',
+                data:null
+            });                    
+        }
+
+    });
+
+
+}
 

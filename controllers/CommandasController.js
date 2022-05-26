@@ -529,7 +529,7 @@ exports.getLastCommandaid = (req,res)=> {
 
 }
 
-// ok
+// eseguo la cancellazione commande - commandarighe e imposto i contatori auto_increment a 1 per nuova giornata
 exports.deleteAll = (req,res)=> {
     
     let strsql = '';
@@ -538,7 +538,7 @@ exports.deleteAll = (req,res)=> {
       
     strsql =  ' delete from `commandas` ';  
     console.log(`strsql:  ${strsql} `);
-  
+  // cancello le commande
     db.query(strsql,(err,result)=> {
         if(err) {
            res.status(500).send({
@@ -547,18 +547,54 @@ exports.deleteAll = (req,res)=> {
             });
             return;
         }
-       
-        console.log('cancellato tutta la tabella commandas ' + result.length); 
-        res.status(200).send({ 
-                message: `cancellate tutte le commande  !! `,
-                rc: 'kk',
+    }); 
+
+    strsql = 'ALTER TABLE `commandas` AUTO_INCREMENT = 1';
+    db.query(strsql,(err,result)=>  {
+            if(err) {
+               res.status(500).send({
+                    message: `resetIndice -  errore reset indice commandas - errore: ${err}`,
+                    data:null
+                });
+                return;
+            }
+        });
+
+// cancello le righe commande
+strsql =  ' delete from `commandarigas` ';  
+db.query(strsql,(err,result)=> {
+    if(err) {
+       res.status(500).send({
+            message: `4x errore cancellazione tutte righe commande - erro: ${err}`,
+            data:null
+        });
+        return;
+    }
+});
+ 
+strsql = 'ALTER TABLE `commandarigas` AUTO_INCREMENT = 1';
+db.query(strsql,(err,result)=>  {
+        if(err) {
+           res.status(500).send({
+                message: `resetIndice -  errore reset indice righe commandas - errore: ${err}`,
+                data:null
+            });
+            return;
+        }
+    });
+
+  
+    res.status(200).send({ 
+                message: `cancellate tutte le commande, righecommande e impostati a 1 i valori per id  !! `,
+                rc: 'ok',
                 data:null
             });                    
-        });
+ 
+
 
 }
 
-// ------------ non da errore ma non cancella
+// ------------ non da errore ma non cancella ----- buttare
 exports.deleteAllTrunc = (req,res)=> {
     
     let strsql = '';
@@ -603,7 +639,7 @@ exports.deleteAllTrunc = (req,res)=> {
         console.log('cancellato tutta la tabella commandas ' ); 
         res.status(200).send({ 
                 message: `cancellate tutte le commande  !! `,
-                rc: 'kk',
+                rc: 'ok',
                 data:null
             });                    
        
@@ -785,4 +821,3 @@ exports.getCommandeforGiornataeCompetenzaestato = (req,res)=> {
       });
      
   }
-

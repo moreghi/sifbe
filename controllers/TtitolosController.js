@@ -74,7 +74,7 @@ exports.createNew = (req,res)=> {
       // creo le variabili dai campi di input
       let id = req.body.id;
       let d_titolo = req.body.d_titolo;
-      let id_utenti_operation = req.body.id_utenti_operation;
+      let key_utenti_operation = req.body.key_utenti_operation;
   
   /*
       Attenzione:
@@ -85,10 +85,10 @@ exports.createNew = (req,res)=> {
   */
   
       let strsql =  `insert into t_titolos
-                  (id,d_titolo,id_utenti_operation) 
+                  (id,d_titolo,key_utenti_operation) 
                   valueS
                   (
-                    ${id},'${d_titolo}',${id_utenti_operation} 
+                    ${id},'${d_titolo}',${key_utenti_operation} 
                   )`;
       
     
@@ -125,12 +125,12 @@ exports.createNew = (req,res)=> {
     // definisco le variabili per aggiornamento campi
 
     let d_titolo = req.body.d_titolo;
-    let id_utenti_operation = req.body.id_utenti_operation;
+    let key_utenti_operation = req.body.key_utenti_operation;
 
 
     let strsql =  `update t_titolos set
                     d_titolo = '${d_titolo}',
-                    id_utenti_operation = '${id_utenti_operation}'
+                    key_utenti_operation = '${key_utenti_operation}'
                     where id = ${id}`;
 
     // verifico prima l'esistenza del record
@@ -183,7 +183,7 @@ exports.updateByid1 = (req,res)=> {
    let stato = {
             d_stato_: req.body.d_stato_,
             tappo: req.body.tappo,
-            id_utenti_operation: req.body.id_utenti_operation,
+            key_utenti_operation: req.body.key_utenti_operation,
        }
 
  db.query(strsql_Inqu,(err,result)=> {  

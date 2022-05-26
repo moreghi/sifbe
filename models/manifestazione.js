@@ -24,11 +24,11 @@ module.exports = (sequelize, Sequelize) => {
         underscored: 0
       },
       dtInizio: {
-        type: Sequelize.DATE,
+        type: Sequelize.STRING,
         underscored: 0
       },
       dtFine: {
-        type: Sequelize.DATE,
+        type: Sequelize.STRING,
         underscored: 0
       },
       buonoPastoCommanda: {

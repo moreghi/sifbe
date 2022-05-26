@@ -1017,6 +1017,56 @@ exports.getCountbyprodotto = (req,res)=> {
 
 
 
+exports.getrighebyCommandaeCompetenza = (req,res)=> {
+    let idCommanda = req.params.id;
+    let comp = req.params.comp;
+    let fase = req.params.fase;
+
+    let strsql = '';
+    if(fase === 'Cu')  {
+        strsql = strSql + ' where `commandarigas`.`idCommanda` = ' + idCommanda + ' and `commandarigas`.`competenza` = ' + comp;
+     }
+     if(fase === 'Co')  {
+        strsql = strSql + ' where `commandarigas`.`idCommanda` = ' + idCommanda + ' and `commandarigas`.`competenza` = ' + comp + ' and `commandarigas`.`flag_lavorazione` = 1';
+     }    
+
+    console.log('backend - getrighebyCommandaeCompetenza ---------  strsql --> ' + strsql);
+      
+    db.query(strsql,(err,result)=> {
+        if(err) {
+           res.status(500).send({
+                message: `3gt errore in lettura all righe per commanda e competenza --- erro: ${err}`,
+                data:null
+            });
+            return;
+        }
+        if(result.length>0) {
+            console.log('lettura tutte le righe per commanda e competenza' + result.length);  
+
+            console.log(`rilevate ${result.length} righe per commanda e competenza`)
+            res.status(200).send({ 
+                message:'Situazione attuale righe per commanda',
+                number:  result.length,
+                rc: 'ok',
+                data:result
+            });                    
+        }else {
+            console.log('nessuna riga presente per la commanda ' + result.length); 
+
+            res.status(200).send({ 
+                message: `nessuna riga presente per la commanda `,
+                rc: 'nf',
+                data:null
+            });                    
+        }
+
+    });
+}
+
+
+
+
+
 /*
 https://github.com/rkloecker/node-mysql-albums-CRUD-app/blob/master/controllers/albumController.js  <---
 https://github.com/sutin1234/nodejs-mysql-async-await/blob/master/modules/ProductModule.js

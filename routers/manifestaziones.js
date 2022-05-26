@@ -26,7 +26,7 @@ router.get('/getbystato/:stato' , manifestaziones.getbystato);   // , [authjwt.v
 // creazione nuovo utente
 router.post('/create',  manifestaziones.createNew);   // [authjwt.verifyToken] ,
 // aggiornamento utente  
-router.put('/updatebyid/:id' , manifestaziones.updateByid1);
+router.put('/updatebyid/:id' , manifestaziones.updateByid);
 // cancellazione utente
 router.delete('/deletebyid/:id', [authjwt.verifyToken] , manifestaziones.delete);
 

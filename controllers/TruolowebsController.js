@@ -16,12 +16,14 @@ exports.getAll = (req,res)=> {
             console.log(`rilevati ${result.length} ruoli `)
             res.send({
                 message:'Situazione attuale RuoliWeb',
+                rc: 'ok',
                 data:result
             });
         }else {
             console.log('nessun record presente ' + result.length); 
             res.send({
                 message:'nessun record presente',
+                rc: 'nf',
                 data:null
             });
         }
@@ -46,12 +48,14 @@ exports.getbyid = (req,res)=> {
             res.send({
              messagexx:`rilevati ${result.length}  ------- get per id ${key} -------   Ruoli`,
                 message:`situazione attuale per ruoloweb id: .....  ${key}`,
+                rc: 'ok',
                 data:result[0]
             });
         }else {
             console.log(`nessun record presente per id: ${key} `); 
             res.send({
                 message: `nessun ruolo presente for id: ${key}`,
+                rc: 'nf',
                 data:null
             });
         }
@@ -97,6 +101,7 @@ exports.createNew = (req,res)=> {
         
                   res.send({
                   message: `Ruoloweb inserito regolarmente `,
+                  rc: 'ok',
                   data: result
               });
              

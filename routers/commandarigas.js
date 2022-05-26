@@ -29,9 +29,8 @@ router.delete('/deletebyid/:id', [authjwt.verifyToken] , commandarigas.delete);
 // lettura righe di commanda
 router.get('/commanda/:id' , [authjwt.verifyToken]  , commandarigas.getrighebyCommanda);
 
-
-
-
+// lettura righe di commanda per competenza
+router.get('/commanda/:id/comp/:comp/fase/:fase' , [authjwt.verifyToken]  , commandarigas.getrighebyCommandaeCompetenza);
 
 // ricerca per prodotti Cucina da Lavorare
 router.get('/getCommanderighedaLavorare/:comp/flagL/:flagl', [authjwt.verifyToken] , commandarigas.getCommanderighedaLavorare);

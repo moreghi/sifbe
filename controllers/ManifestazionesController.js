@@ -32,13 +32,15 @@ const db = require('../db');
 const bcrypt = require('bcrypt');
 const salt = bcrypt.genSaltSync(10);
 
-const strSql = "select * from `manifestaziones`  " + 
-               " inner join `t_stato_manifestaziones` ON `t_stato_manifestaziones`.`idt` = `manifestaziones`.`stato` " 
+const strSql = 'select `manifestaziones`.`*`, `t_stato_manifestaziones`.`d_stato_manifestazione` ' +  
+               ' from `manifestaziones`  ' + 
+               ' inner join `t_stato_manifestaziones` ON `t_stato_manifestaziones`.`id` = `manifestaziones`.`stato` '; 
+const order =  ' order by `manifestaziones`.`id` desc';
 
 
 exports.getAll = (req,res)=> {
  
-    let strsql = strSql;
+    let strsql = strSql + order;
 
     console.log('backend - Manifestazione -- strsql: ' + strsql);
 
@@ -123,7 +125,7 @@ exports.getbystato = (req,res)=> {
     
     const stato = req.params.stato;
     
-    let strsql = strSql + ' where `manifestaziones`.`stato` = ' + stato;
+    let strsql = strSql + ' where `manifestaziones`.`stato` = ' + stato + order;
 
     console.log('backend - getbystato - strsql --> ' + strsql);
   
@@ -147,7 +149,7 @@ exports.getbystato = (req,res)=> {
                 message:`situazione attuale per manifestazione stato: .....  ${stato}`,
                 number:  result.length,
                 rc: 'ok',
-                data:result[0]
+                data:result
             });                    
         }else {
             console.log(`nessun record presente per stato: ${stato} `);
@@ -231,6 +233,8 @@ exports.createNew = (req,res)=> {
 
     let descManif = req.body.descManif;
     let anno = req.body.anno;
+    let dtInizio = req.body.dtInizio;
+    let dtFine = req.body.dtFine;
     let buonoPastoCommanda = req.body.buonoPastoCommanda;
     let impCoperto = req.body.impCoperto;
     let noteManifestazione = req.body.noteManifestazione;
@@ -240,16 +244,18 @@ exports.createNew = (req,res)=> {
 
     let strsql =  `update manifestaziones set
                     descManif = '${descManif}',
-                    anno = '${anno}',
-                    buonoPastoCommanda = '${buonoPastoCommanda}',
-                    impCoperto = '${impCoperto}',
+                    anno = ${anno},
+                    dtInizio = '${dtInizio}',
+                    dtFine = '${dtFine}',
+                    buonoPastoCommanda = ${buonoPastoCommanda},
+                    impCoperto = ${impCoperto},
                     noteManifestazione = '${noteManifestazione}',
                     stampeBackOffice = '${stampeBackOffice}',
-                    key_utenti_operation = '${key_utenti_operation}'
+                    key_utenti_operation = ${key_utenti_operation}
                     where id = ${id}`;
 
 
-                    console.log('update: ' + strsql);
+                    console.log('bk - --------------  manifestazione ---------------- update: ' + strsql);
                     
     // verifico prima l'esistenza del record
 

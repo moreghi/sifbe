@@ -16,12 +16,14 @@ exports.getAll = (req,res)=> {
             console.log(`rilevati ${result.length} stati t_stato_rigacommanda `)
             res.send({
                 message:'Situazione attuale stati t_stato_rigacommanda',
+                rc: 'ok',
                 data:result
             });
         }else {
             console.log('nessun record presente ' + result.length); 
             res.send({
                 message:'nessun record presente',
+                rc: 'nf',
                 data:null
             });
         }
@@ -46,12 +48,14 @@ exports.getbyid = (req,res)=> {
             res.send({
              messagexx:`rilevati ${result.length}  ------- get per id ${key} -------   Stati t_stato_rigacommanda`,
                 message:`situazione attuale per ruolo id: .....  ${key}`,
+                rc: 'ok',
                 data:result[0]
             });
         }else {
             console.log(`nessun record presente per id: ${key} `); 
             res.send({
                 message: `nessun ruolo presente for id: ${key}`,
+                rc: 'nf',
                 data:null
             });
         }
@@ -66,15 +70,15 @@ exports.createNew = (req,res)=> {
     //  console.log(req.body,'Creazione nuovo t_stato_rigacommanda');  // visualizzo la struttura dei campi immessi dall't_stato_rigacommanda 
   
       // creo le variabili dai campi di input
+      let id = req.body.id;
       let d_stato_riga_commanda = req.body.d_stato_riga_commanda;
-      let tappo = req.body.tappo;
       let key_utenti_operation = req.body.key_utenti_operation;
   
       let strsql =  `insert into t_stato_rigacommandas
-                  (d_stato_riga_commanda,tappo,key_utenti_operation) 
+                  (id,d_stato_riga_commanda,key_utenti_operation) 
                   valueS
                   (
-                     '${d_stato_riga_commanda}','${tappo}','${key_utenti_operation}' 
+                    ${id},'${d_stato_riga_commanda}',${key_utenti_operation} 
                   )`;
       
     
@@ -117,7 +121,7 @@ exports.createNew = (req,res)=> {
     let strsql =  `update t_stato_rigacommandas set
                     d_stato_riga_commanda = '${d_stato_riga_commanda}',
                     tappo = '${tappo}',
-                    key_utenti_operation = '${key_utenti_operation}'
+                    key_utenti_operation = ${key_utenti_operation}
                     where id = ${key}`;
 
     // verifico prima l'esistenza del record

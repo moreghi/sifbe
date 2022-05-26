@@ -157,7 +157,7 @@ exports.updatebyid = (req,res)=> {
 
     // definisco le variabili per aggiornamento campi
 
-  
+    let dtGiornata = req.body.dtGiornata;
     let stato = req.body.stato;
     let statoMagazzino = req.body.statoMagazzino;
     let statoCassa = req.body.statoCassa;
@@ -208,6 +208,7 @@ exports.updatebyid = (req,res)=> {
     let key_utenti_operation = req.body.key_utenti_operation;
 
     let strsql =  `update giornatas set
+                    dtGiornata =  '${dtGiornata}',
                     stato = ${stato},
                     statoMagazzino = ${statoMagazzino},
                     statoCassa = ${statoCassa}, 
@@ -531,11 +532,18 @@ exports.getGiornataActive = (req,res)=> {
  
     let stato = 2;    // gioto attivo 
     let oggix = new Date();
-    let dd = oggix.getDate();
+    let dd = oggix.getDate().toString();
+    if(dd.length === 1) {
+       dd = '0' + dd;
+    }
     let mm = oggix.getMonth() + 1;
-    if(mm.length = 1) {
+    mm = mm.toString();
+    if(mm.length === 1) {
         mm = '0' + mm;
     }
+
+    console.log('giornataAttiva: gg ' + dd + ' mm: ' + mm); 
+
     let yyyy = oggix.getFullYear();
     let oggiStart = yyyy + "-" + mm + "-" + dd + ' 00:00:00';
     let oggiEnd = yyyy + "-" + mm + "-" + dd + ' 23:59:59';
@@ -720,6 +728,49 @@ exports.getforChart = (req,res)=> {  // da finire
     });
 
 }
+
+// verifico se presenti giornate con stati 0 - 1 - 2
+exports.getGiornateByStato = (req,res)=> {
+ 
+    let stato = req.params.stato;
+
+    let strsql = '';
+    strsql = strSql + ' where `giornatas`.`stato` < 3 '; 
+    console.log('backend - Giornates - getGiornateByManifIdbyStato1 ' + strsql);
+   
+    db.query(strsql,(err,result)=> {
+        if(err) {
+           res.status(500).send({
+                message: `3 errore il lettura all giornates per Manifestazione - erro: ${err}`,
+                data:null
+            });
+            return;
+        }
+        if(result.length>0) {
+            console.log('lettura giornate per stato < 3' + result.length);  
+
+            console.log(`rilevate ${result.length} giornate `)
+            res.status(200).send({ 
+                rc: 'ok',
+                message:'Situazione attuale giornate per lo stato selezionato',
+                number:  result.length,
+                data:result
+            });                    
+        }else {
+            console.log('nessun record presente ' + result.length); 
+
+            res.status(200).send({ 
+                message: `nessun user pressente `,
+                rc: 'nf',
+                number:  result.length,
+                data:null
+            });                    
+        }
+
+    });
+}
+
+
 
 
 

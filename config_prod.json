@@ -1,9 +1,9 @@
 {
     
     "host": "eu-cdbr-west-02.cleardb.net",
-    "user": "b60576bf178464",
-    "password": "dddd8db2",
-    "database":"heroku_002b5ddee9750af",
+    "user": "b55cc716c83e5f",
+    "password": "a1e6c23d",
+    "database":"heroku_2f07c917b71f13a",
     "port":3306,
     "dialect": "mysql",
     "underscored": 0,

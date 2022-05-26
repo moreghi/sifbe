@@ -37,6 +37,7 @@ const graphprod1Router = require('./routers/graphprods1');
 const prenotConfirmRouter = require('./routers/prenotazioneConfirmed');
 const fornitoreRouter = require('./routers/fornitores');
 const spesaRouter = require('./routers/spesas');
+const messageRouter = require('./routers/messages');
 
 
 // controllo funzione in base al modulo e al livello
@@ -65,7 +66,21 @@ const statofornitoreRouter = require('./routers/t_stato_fornitores');
 const statospesaRouter = require('./routers/t_stato_spesas');
 const titoloRouter = require('./routers/t_titolos');
 const statopersonaRouter = require('./routers/t_stato_personas');
-
+const tabellatRouter = require('./routers/tabellats');
+const tabellatwdettRouter = require('./routers/tabellatwdetts');
+const tabellatwRouter = require('./routers/tabellatws');
+const statobevandeRouter = require('./routers/t_stato_bevandes');
+const statocassaRouter = require('./routers/t_stato_cassas');
+const statocommandaRouter = require('./routers/t_stato_commandas');
+const statocontabileRouter = require('./routers/t_stato_contabiles');
+const statocucinaRouter = require('./routers/t_stato_cucinas');
+const statogiornataRouter = require('./routers/t_stato_giornatas');
+const statolavorazioneRouter = require('./routers/t_stato_lavoraziones');
+const statomagazzinoRouter = require('./routers/t_stato_magazzinos');
+const statoconsegnaRouter = require('./routers/t_stato_consegnas');
+const statoprenotazioneRouter = require('./routers/t_stato_prenotaziones');
+const statoutentiRouter = require('./routers/t_stato_utentis');
+const ttipocommandaRouter = require('./routers/t_tipo_commandas');
 
 // per upload images
 const imageRouter = require('./routers/images');
@@ -78,19 +93,19 @@ const imageRouter = require('./routers/images');
 
 
 // per ambiente di sviluppo su localhost
-/*
+
  var corsOptions = {
     origin: "http://localhost:4200"             
  };
-*/
+
 
 
 // per il deploy su heroku o altro hosting   2022/04/06
-
+/*
  var corsOptions = {
   origin: "https://siffe.vercel.app"             
  };
-
+*/
 
 const app = express();
 // utilizzo i pacchetti
@@ -127,6 +142,9 @@ app.use('/graphprod1', graphprod1Router);
 app.use('/prenotConfirm', prenotConfirmRouter);
 app.use('/fornitore', fornitoreRouter);
 app.use('/spesa', spesaRouter);
+app.use('/message', messageRouter);
+
+
 
 
 app.use('/api/auth', authRouter);
@@ -147,7 +165,21 @@ app.use('/statofornitore', statofornitoreRouter);
 app.use('/tstatospesa', statospesaRouter);
 app.use('/ttitolo', titoloRouter);
 app.use('/statopersona', statopersonaRouter);
-
+app.use('/tabellat', tabellatRouter);
+app.use('/tabellatwdett', tabellatwdettRouter);
+app.use('/tabellatw', tabellatwRouter);
+app.use('/statobevande', statobevandeRouter);
+app.use('/tstatocassa', statocassaRouter);
+app.use('/tstatocommanda', statocommandaRouter);
+app.use('/tstatocontabile', statocontabileRouter);
+app.use('/tstatocucina', statocucinaRouter);
+app.use('/tstatogiornata', statogiornataRouter);
+app.use('/tstatolavorazione', statolavorazioneRouter);
+app.use('/tstatomagazzino', statomagazzinoRouter);
+app.use('/tstatoconsegna', statoconsegnaRouter);
+app.use('/statoprenotazione', statoprenotazioneRouter);
+app.use('/tstatoutenti', statoutentiRouter);
+app.use('/ttipocommanda', ttipocommandaRouter);
 
 // per upload images
 

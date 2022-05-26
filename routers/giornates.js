@@ -46,6 +46,7 @@ router.get('/getLastGiornataByManifId/:id', giornates.getLastGiornataByManif);
 //router.get('/getGiornateByManifId/:id', [authjwt.verifyToken], giornates.getGiornateByManifId);
 
 
+router.get('/getGiornateByStato/:stato', giornates.getGiornateByStato);
 
 router.get('/getforChart/graph/:id', giornates.getforChart);
 

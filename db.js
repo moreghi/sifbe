@@ -185,7 +185,7 @@ db.graphprod = require("./models/graphprod.js")(sequelize, Sequelize);
 db.prenotazioneConfirmed = require("./models/prenotazioneConfirmed.js")(sequelize, Sequelize);
 db.fornitore = require("./models/fornitore.js")(sequelize, Sequelize);
 db.spesa = require("./models/spesa.js")(sequelize, Sequelize);
-
+db.message = require("./models/message.js")(sequelize, Sequelize);
 
 
 
@@ -225,6 +225,11 @@ db.tstatoprodotto = require("./models/t-stato-prodotto.js")(sequelize, Sequelize
 db.tsettore = require("./models/t-settore.js")(sequelize, Sequelize);
 db.tstatofornitore = require("./models/t-stato-fornitore.js")(sequelize, Sequelize);
 db.tstatospesa = require("./models/t-stato-spesa.js")(sequelize, Sequelize);
+db.ttabellats = require("./models/t-tabella-ts.js")(sequelize, Sequelize);
+db.ttabellatwdetts = require("./models/t-tabella-tw-detts.js")(sequelize, Sequelize);
+db.ttabellatws = require("./models/t-tabella-tws.js")(sequelize, Sequelize);
+db.tstatocontabile = require("./models/t-stato-contabile.js")(sequelize, Sequelize);
+db.ttipocommanda = require("./models/t-tipo-commanda.js")(sequelize, Sequelize);
 
 //  ----------------------------------------------------------------------------- relazioni tra tabelle
 // relazione tra Users e Truolo

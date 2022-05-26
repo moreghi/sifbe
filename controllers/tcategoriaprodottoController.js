@@ -125,13 +125,10 @@ exports.createNew = (req,res)=> {
     // definisco le variabili per aggiornamento campi
 
     let d_categoria = req.body.d_categoria;
-    let stato = req.body.stato;
     let key_utenti_operation = req.body.key_utenti_operation;
-
 
     let strsql =  `update t_categoria_prodottos set
                     d_categoria = '${d_categoria}',
-                    stato = '${stato}',
                     key_utenti_operation = '${key_utenti_operation}'
                     where id = ${key}`;
 

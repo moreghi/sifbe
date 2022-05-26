@@ -156,6 +156,21 @@ downloadpersones = (req, res) => {
   });
 };
 
+downloadimages = (req, res) => {
+
+  console.log('-----------------------------------------------     downloadimage');
+  const fileName = req.params.name;
+  const directoryPath = __basedir + "/resources/static/assets/uploads/images/message/";
+
+  res.download(directoryPath + fileName, fileName, (err) => {
+    if (err) {
+      res.status(500).send({
+        messageupload: "Could not download the file. " + err,
+      });
+    }
+  });
+};
+
 
 
 module.exports = {
@@ -166,5 +181,6 @@ module.exports = {
   downloaddirettivo,
   downloadcarousel,
   downloadproducts,
-  downloadpersones
+  downloadpersones,
+  downloadimages
 };

@@ -48,12 +48,14 @@ exports.getbyid = (req,res)=> {
             res.send({
              messagexx:`rilevati ${result.length}  ------- get per id ${id} -------   Stati prodotto`,
                 message:`situazione attuale per stato id: .....  ${id}`,
+                rc: 'ok',
                 data:result[0]
             });
         }else {
             console.log(`nessun record presente per id: ${id} `); 
             res.send({
                 message: `nessun stato presente for id: ${id}`,
+                rc: 'nf',
                 data:null
             });
         }
@@ -74,7 +76,7 @@ exports.createNew = (req,res)=> {
       let key_utenti_operation = req.body.key_utenti_operation;
    
       let strsql =  `insert into t_stato_prodottos
-                  (id,d_stato_prodotto,tappo,id_utenti_operation) 
+                  (id,d_stato_prodotto,tappo,key_utenti_operation) 
                   valueS
                   (
                     ${id},'${d_stato_prodotto}','${tappo}',${key_utenti_operation} 
@@ -121,7 +123,7 @@ exports.createNew = (req,res)=> {
     let strsql =  `update t_stato_prodottos set
                     d_stato_prodotto = '${d_stato_prodotto}',
                     tappo = '${tappo}',
-                    id_utenti_operation = ${key_utenti_operation}
+                    key_utenti_operation = ${key_utenti_operation}
                     where id = ${id}`;
 
     // verifico prima l'esistenza del record
@@ -174,7 +176,7 @@ exports.updateByid1 = (req,res)=> {
    let stato = {
             d_stato_prodotto: req.body.d_stato_prodotto,
             tappo: req.body.tappo,
-            id_utenti_operation: req.body.id_utenti_operation,
+            key_utenti_operation: req.body.key_utenti_operation,
        }
 
  db.query(strsql_Inqu,(err,result)=> {  

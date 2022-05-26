@@ -15,7 +15,7 @@ module.exports = (sequelize, Sequelize) => {
           primaryKey:true
       },
       dtGiornata: {
-        type: Sequelize.DATE,
+        type: Sequelize.STRING,
         underscored: 0
       },
       idManifestazione: {
