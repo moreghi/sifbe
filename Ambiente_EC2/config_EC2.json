@@ -1,0 +1,34 @@
+{
+    
+    "host": "localhost",
+    "user": "moreno",
+    "password": "Moreno01@",
+    "database":"sif",
+    "port":3306,
+    "dialect": "mysql",
+    "underscored": 0,
+    "pool": {
+      "max": 5,
+      "min": 0,
+      "acquire": 30000,
+      "idle": 10000
+    },
+     
+    "secret": "mysecret is zoe",
+    "expiresIn": 86400, 
+    "emailFrom": "info@ghisellinimoreno.it",
+    "smtpOptions": {
+        "host": "email-smtp.eu-north-1.amazonaws.com",
+        "port": 587,
+        "auth": {
+            "user": "AKIAYUMH36XNVEPGRR7G",                            
+            "pass": "BF/5iMLpJU1Q2TV4AyXyxgWaJ4Etr6fJDEbHx/Ute+55"
+                     
+        },
+        "tls": {
+            "rejectUnauthorized": false
+        },
+        "secure": false
+    }
+    
+}

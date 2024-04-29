@@ -1,0 +1,7 @@
+// parametri per ambiente di sviluppo
+
+{
+    "hostfe": "http://localhost:4200",
+    "hostbecomm": "http://localhost:3001/"
+}
+
